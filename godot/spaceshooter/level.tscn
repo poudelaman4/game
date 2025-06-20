@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn03hk5q1b8f6"]
+
+[ext_resource type="Script" uid="uid://bkk0yfxwk6px0" path="res://level.gd" id="1_0b4ue"]
+[ext_resource type="Texture2D" uid="uid://dg2fcwj1dwd0g" path="res://Backgrounds/purple.png" id="1_u52ul"]
+[ext_resource type="PackedScene" uid="uid://dm5olii8ad0yi" path="res://player.tscn" id="2_vonw3"]
+[ext_resource type="PackedScene" uid="uid://d2posdgfnw2eb" path="res://maze_1.tscn" id="3_oi3di"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0b4ue"]
+font_size = 19
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_0b4ue")
+
+[node name="graphics" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="graphics"]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="graphics/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0018)
+texture = ExtResource("1_u52ul")
+stretch_mode = 1
+
+[node name="StartLabel" type="Label" parent="graphics"]
+offset_left = 370.0
+offset_top = 63.0
+offset_right = 582.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 71
+text = "START"
+
+[node name="EndLabel" type="Label" parent="graphics"]
+offset_left = 1095.0
+offset_top = 25.0
+offset_right = 1257.0
+offset_bottom = 122.0
+rotation = 1.5708
+theme_override_font_sizes/font_size = 71
+text = "END"
+
+[node name="Rukes" type="Label" parent="graphics"]
+offset_left = 13.0
+offset_top = 58.0
+offset_right = 368.0
+offset_bottom = 145.0
+text = "Move with arrow keys or WASD 
+If UFO goes about 65% off its reset
+Go from start to end and complete lvl1"
+label_settings = SubResource("LabelSettings_0b4ue")
+
+[node name="Player" parent="." instance=ExtResource("2_vonw3")]
+z_index = 1
+position = Vector2(468, 114.205)
+scale = Vector2(1, 1.0018)
+
+[node name="Maze" parent="." instance=ExtResource("3_oi3di")]
+position = Vector2(-4, -1)
+
+[connection signal="focus_entered" from="graphics/EndLabel" to="." method="_on_end_label_focus_entered"]
+[connection signal="body_entered" from="Maze" to="." method="_on_maze_body_entered"]
+[connection signal="body_exited" from="Maze" to="." method="_on_maze_body_exited"]

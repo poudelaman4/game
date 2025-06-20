@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2f74kbe7bcrg"]
+
+[ext_resource type="Texture2D" uid="uid://cwitwvbadn47g" path="res://assets/textures/rocket.png" id="1_3341w"]
+[ext_resource type="Script" uid="uid://36bityb7xmww" path="res://scripts/rocket.gd" id="1_dkv7l"]
+
+[node name="Rocket" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_dkv7l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 4.71239
+texture = ExtResource("1_3341w")
+
+[node name="notify" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-3, 35)
+scale = Vector2(1.95, 1.8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-18, -46, -7, -59, -2, -61, 9, -59, 17, -45, 25, -33, 27, -20, 21, 4, 13, 16, 19, 28, 17, 52, 10, 53, 0, 58, -10, 55, -15, 55, -22, 64, -30, 47, -26, 27, -24, 18, -19, 14, -26, -8, -26, -29)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

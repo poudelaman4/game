@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnds4mh5x7nvy"]
+
+[ext_resource type="Texture2D" uid="uid://dcyhoy4743y2o" path="res://assets/textures/enemy_ship_2.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://30mct7qtxwa8" path="res://scripts/enemy.gd" id="1_md0e3"]
+
+[node name="enemy" type="Area2D" groups=["enemies"]]
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_md0e3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+texture = ExtResource("1_7p1mj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(4, 352, -12, 316, -48, 196, -64, 168, -64, 132, -72, 76, -92, 44, -88, 4, -84, -84, -76, -132, -76, -148, -68, -156, -60, -164, -44, -204, -44, -224, -32, -236, -44, -268, -56, -276, -44, -288, -56, -320, -4, -332, 36, -332, 64, -320, 64, -296, 52, -296, 52, -284, 60, -276, 56, -268, 48, -240, 56, -220, 60, -208, 64, -188, 84, -148, 92, -136, 84, -124, 92, -108, 92, -76, 96, -36, 96, 8, 88, 48, 84, 72, 72, 100, 68, 128, 72, 160, 60, 188, 44, 224, 28, 280)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
