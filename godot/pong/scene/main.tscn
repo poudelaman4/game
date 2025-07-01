@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch54klfio8xfn"]
+
+[ext_resource type="PackedScene" uid="uid://be587hnrt1d7i" path="res://scene/player.tscn" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://cy7m1mu5fivay" path="res://scripts/main.gd" id="1_v0l8b"]
+[ext_resource type="PackedScene" uid="uid://ty4ejar4k4ty" path="res://scene/enemy_ai.tscn" id="3_brvut"]
+[ext_resource type="PackedScene" uid="uid://co654qo4a1gtm" path="res://scene/ball.tscn" id="4_brvut"]
+[ext_resource type="PackedScene" uid="uid://clda8dcyrtcx3" path="res://scene/wall.tscn" id="5_0ha60"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_v0l8b")
+
+[node name="player" parent="." instance=ExtResource("1_itxqv")]
+position = Vector2(322, 611)
+
+[node name="EnemyAI" parent="." instance=ExtResource("3_brvut")]
+position = Vector2(324, 48)
+
+[node name="ball" parent="." instance=ExtResource("4_brvut")]
+position = Vector2(310, 361)
+disable_mode = 0
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="wall" parent="Walls" instance=ExtResource("5_0ha60")]
+
+[node name="wall2" parent="Walls" instance=ExtResource("5_0ha60")]
+position = Vector2(0, 640)
+
+[node name="wall3" parent="Walls" instance=ExtResource("5_0ha60")]
+position = Vector2(0, -33)
+rotation = 1.5708
+
+[node name="wall4" parent="Walls" instance=ExtResource("5_0ha60")]
+position = Vector2(720, -33)
+rotation = 1.5708
+
+[connection signal="body_entered" from="ball" to="ball" method="_on_body_entered"]

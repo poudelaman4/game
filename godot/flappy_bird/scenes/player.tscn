@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dv3pa5vwu75cs"]
+
+[ext_resource type="Script" uid="uid://dsldm56pgnt3a" path="res://scripts/player.gd" id="1_dqkch"]
+[ext_resource type="Texture2D" uid="uid://dmber3lql45vu" path="res://assets/bird1.png" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://cv03vfsfgoh31" path="res://assets/bird2.png" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://c42c2g14x4m53" path="res://assets/bird3.png" id="3_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://ds25okp5uqhqc" path="res://assets/sounds/flap-101soundboards.mp3" id="5_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://dg8ms27je4cp" path="res://assets/sounds/flappy-bird-hit-sound-101soundboards.mp3" id="6_fjrip"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qhqgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dqkch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qlg0r")
+}],
+"loop": true,
+"name": &"bird",
+"speed": 15.0
+}]
+
+[node name="player" type="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+script = ExtResource("1_dqkch")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tuyoq")
+animation = &"bird"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-6, -9, -5, -9, -5, -11, -3, -11, -3, -10, -2, -10, -2, -7, -1, -7, -1, -8, 0, -8, 0, -9, 6, -9, 6, -8, 7, -8, 7, -7, 9, -7, 9, -6, 10, -6, 10, -5, 11, -5, 11, -3, 10, -3, 10, -2, 9, -2, 9, -1, 8, -1, 8, 0, 7, 0, 7, 1, 6, 1, 6, 2, 3, 2, 3, 3, 1, 3, 1, 4, -3, 4, -3, 5, -10, 5, -10, 1, -9, 1, -9, -1, -8, -1, -8, -2, -6, -2, -6, -4, -7, -4, -7, -8, -6, -8)
+
+[node name="FlapSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_tuyoq")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_fjrip")
